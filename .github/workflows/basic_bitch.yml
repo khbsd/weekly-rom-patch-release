@@ -18,7 +18,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   call-workflow-test:
-    uses: ./.github/workflows/whats_good.yml
+    uses: ./.github/workflows/whats_good.yml@main
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -28,8 +28,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: step 1
-        uses: actions/checkout@v6
-      - name: step 2
         uses: actions/setup-node@v6
 
       # Runs a single command using the runners shell

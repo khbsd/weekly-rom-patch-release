@@ -1,5 +1,5 @@
 import { writeFile } from 'node:fs'
-import { path } from 'path'
+const path = require('node:path');
 
 let string = "console.log('whats mcfuckin good cunts');";
 const data = new Uint8Array(Buffer.from(string));

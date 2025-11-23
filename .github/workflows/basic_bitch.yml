@@ -35,8 +35,9 @@ jobs:
 
       - name: get action-gh-release
         uses: softprops/action-gh-release@v2
-        #if: github.ref_type == 'tag'
+        if: github.ref_type == 'tag'
         with:
+          tag_name: ${{ env.SHORT_SHA }}
           files: Release.txt
           make_latest: true
 

@@ -21,7 +21,9 @@ jobs:
 
     steps:
       - name: Install binutils
-        run: echo hi binutils
+        run: |
+          sudo apt update
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
 
       - name: Make agbcc
         run: |

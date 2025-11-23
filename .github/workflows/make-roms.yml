@@ -13,7 +13,7 @@ jobs:
 
       # your gba filename
       BASE_ROM: pokeemerald
-      HACK_ROM: pokeemerald-kaya
+      HACK_ROM: pokeemerald_kaya
 
       # what your repo is named
       BASE_REPO: pokeemerald
@@ -30,36 +30,36 @@ jobs:
 
           cd ..
 
-      - name: Make $BASE_ROM
+      - name: Make ${{ env.BASE_ROM }}
         run: |
-          git clone https://github.com/$BASE_AUTHOR/$BASE_ROM ./$BASE_AUTHOR
+          git clone https://github.com/${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM}}./${{ env.BASE_AUTHOR
           cd agbcc
 
           cd ..
 
-          cd ./$BASE_AUTHOR
-          touch $BASE_ROM.gba
+          cd ./${{ env.BASE_AUTHOR }}
+          touch ${{ env.BASE_ROM }}.gba
           ls -a
           cd ..
 
-      - name: Make $HACK_ROM
+      - name: Make ${{ env.HACK_ROM
         run: |
-          git clone https://github.com/$HACK_AUTHOR/$HACK_REPO ./$HACK_AUTHOR
-          cd ./$HACK_AUTHOR
-          touch $HACK_ROM.gba
+          git clone https://github.com/${{ env.HACK_AUTHOR }}/${{ env.HACK_REPO }} ./${{ env.HACK_AUTHOR }}
+          cd ./${{ env.HACK_AUTHOR }}
+          touch ${{ env.HACK_ROM }}.gba
           ls -a
           cd ..
           ls -a
 
-      - name: Upload $BASE_ROM
+      - name: Upload ${{ env.BASE_ROM }}
         uses: actions/upload-artifact@v4
         with:
-          name: $BASE_ROM.gba
-          path: $BASE_AUTHOR/$BASE_ROM.gba
+          name: ${{ env.BASE_ROM }}.gba
+          path: ${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba
 
-      - name: Upload $HACK_ROM
+      - name: Upload ${{ env.HACK_ROM }}
         uses: actions/upload-artifact@v4
         with:
-          name: $HACK_ROM.gba
-          path: $HACK_AUTHOR/$HACK_ROM.gba
+          name: ${{ env.HACK_ROM }}.gba
+          path: ${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
 

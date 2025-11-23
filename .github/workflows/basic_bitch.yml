@@ -31,7 +31,7 @@ jobs:
 
       # your gba filename
       BASE_ROM: pokeemerald
-      HACK_ROM: pokeemerald-kaya
+      HACK_ROM: pokeemerald_kaya
 
       # what your repo is named
       BASE_REPO: pokeemerald
@@ -56,24 +56,24 @@ jobs:
           short_sha=$(git rev-parse --short ${{ github.sha }})
           echo "SHORT_SHA=$short_sha" >> $GITHUB_ENV
 
-      - name: Download $BASE_ROM
+      - name: Download ${{ env.BASE_ROM }}
         uses: actions/download-artifact@v4
         with:
-          name: $BASE_ROM.gba
-          path: $BASE_AUTHOR/$BASE_ROM.gba
+          name: ${{ env.BASE_ROM }}.gba
+          path: ${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba
 
-      - name: Download $HACK_ROM
+      - name: Download ${{ env.HACK_ROM }}
         uses: actions/download-artifact@v4
         with:
-          name: $HACK_ROM.gba
-          path: $HACK_AUTHOR/$HACK_ROM.gba
+          name: ${{ env.HACK_ROM }}.gba
+          path: ${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
 
       - name: Make patch
         run: |
           git clone https://github.com/marcrobledo/RomPatcher.js
           cd RomPatcher.js
           npm install
-          node index.js create -f $PATCH_TYPE ../$BASE_AUTHOR/$BASE_ROM.gba ../$HACK_AUTHOR/$HACK_ROM.gba
+          node index.js create -f ${{ env.PATCH_TYPE }} ../${{ env.BASE_AUTHOR/${{ env.BASE_ROM }}.gba ../${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
 
       - name: make tag
         run: |
@@ -84,4 +84,4 @@ jobs:
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: do release
-        run: gh release create ${{ env.SHORT_SHA }} *.$PATCH_TYPE
+        run: gh release create ${{ env.SHORT_SHA }} *.${{ env.PATCH_TYPE }}

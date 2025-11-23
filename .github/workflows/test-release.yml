@@ -33,5 +33,5 @@ jobs:
         if: github.ref_type == 'tag'
         with:
           files: Release.txt
-          make-latest: true
+          make_latest: true
 

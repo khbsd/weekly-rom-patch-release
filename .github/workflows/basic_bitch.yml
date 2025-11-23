@@ -36,7 +36,7 @@ jobs:
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: do release
-        run: gh release create ${{ env.SHORT_SHA }} ./*.bps
+        run: gh release create ${{ env.SHORT_SHA }}
 
       # Runs a single command using the runners shell
       - run: |

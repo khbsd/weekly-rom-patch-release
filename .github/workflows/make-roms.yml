@@ -21,22 +21,20 @@ jobs:
 
     steps:
       - name: Install binutils
-        run: |
-          sudo apt update
-          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+        run: echo hi binutils
 
       - name: Make agbcc
         run: |
           git clone https://github.com/pret/agbcc
           cd agbcc
-          
+
           cd ..
 
       - name: Make $BASE_ROM
         run: |
           git clone https://github.com/$BASE_AUTHOR/$BASE_ROM ./$BASE_AUTHOR
           cd agbcc
-          ./install.sh ../$BASE_AUTHOR
+
           cd ..
 
           cd ./$BASE_AUTHOR

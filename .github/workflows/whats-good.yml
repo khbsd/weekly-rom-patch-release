@@ -1,7 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
 name: reusable_test
-on: create
+on: workflow_call
 
 # Controls when the workflow will run
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel

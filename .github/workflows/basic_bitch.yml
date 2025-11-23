@@ -28,7 +28,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
-      - uses: ./.github/actions/reusable-actions/basic_bitch_copy.yml
+      - uses: ./.github/workflows/whats_good.yml
 
       # Runs a single command using the runners shell
       - run: node js-scripts/logging.js

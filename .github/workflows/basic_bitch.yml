@@ -33,7 +33,9 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: logging.js
-          path: js-scripts/logging.js
+          path: js-scripts/
 
       # Runs a single command using the runners shell
-      - run: node js-scripts/logging.js
+      - run: |
+          ls -R ./js-scripts
+          node js-scripts/logging.js

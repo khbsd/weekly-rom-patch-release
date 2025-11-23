@@ -1,0 +1,21 @@
+name: make release
+
+on:
+  workflow_call:
+
+jobs:
+  make-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: get repo
+        uses: actions/checkout@v6
+
+      - name: make release.txt
+        run: echo ${{ github.sha }} > Release.txt
+
+      - name: get action-gh-release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Release.txt
+

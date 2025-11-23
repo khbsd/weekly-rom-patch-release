@@ -27,29 +27,26 @@ jobs:
         run: |
           git clone https://github.com/pret/agbcc
           cd agbcc
-
+          ./build.sh
           cd ..
 
       - name: Make ${{ env.BASE_ROM }}
         run: |
           git clone https://github.com/${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }} ./${{ env.BASE_AUTHOR }}
           cd agbcc
-
+          ./install.sh ../{{ env.BASE_AUTHOR }}
           cd ..
 
           cd ./${{ env.BASE_AUTHOR }}
-          touch ${{ env.BASE_ROM }}.gba
-          ls -a
+          make -j
           cd ..
 
       - name: Make ${{ env.HACK_ROM }}
         run: |
           git clone https://github.com/${{ env.HACK_AUTHOR }}/${{ env.HACK_REPO }} ./${{ env.HACK_AUTHOR }}
           cd ./${{ env.HACK_AUTHOR }}
-          touch ${{ env.HACK_ROM }}.gba
-          ls -a
+          make -j
           cd ..
-          ls -a
 
       - name: Upload ${{ env.BASE_ROM }}
         uses: actions/upload-artifact@v4

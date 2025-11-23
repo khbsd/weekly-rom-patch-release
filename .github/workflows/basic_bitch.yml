@@ -30,8 +30,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/setup-node@v6
-      - uses: actions/checkout@v6
+      - name: make release.txt
+        run: echo ${{ env.SHORT_SHA }} > Release.txt
+
+      - name: get action-gh-release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: Release.txt
+          make_latest: true
 
       # Runs a single command using the runners shell
       - run: |

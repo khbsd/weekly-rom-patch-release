@@ -25,13 +25,3 @@ jobs:
           git tag ${{ env.SHORT_SHA }} ${{ github.sha }}
           git push origin ${{ env.SHORT_SHA }}
 
-      - name: make release.txt
-        run: echo ${{ env.SHORT_SHA }} > Release.txt
-
-      - name: get action-gh-release
-        uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
-        with:
-          files: Release.txt
-          make_latest: true
-

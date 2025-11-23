@@ -13,13 +13,30 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v6
 
-      - name: run code
-        run: node js-scripts/whats_good.js
+      - name: Install binutils
+        run: |
+          sudo apt update
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+
+      - name: pokeemerald
+        env:
+          COMPARE: 1
+        run: |
+          git clone https://github.com/pret/pokeemerald
+          git clone https://github.com/pret/agbcc
+          cd agbcc
+          ./build.sh
+          ./install.sh ../pokeemerald
+          cd ..
+
+          cd pokeemerald
+          make -j$(nproc) compare
+          cd ..
 
       - name: get upload artifact
         uses: actions/upload-artifact@v5
         with:
-          name: logging.js
-          path: js-scripts/logging.js
+          name: pokeemerald.gba
+          path: pokeemerald/pokeemerald.gba
           overwrite: true
 

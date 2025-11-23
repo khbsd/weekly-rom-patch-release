@@ -32,10 +32,11 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
         with:
-          name: logging.js
-          path: js-scripts/
+          name: pokeemerald.gba
+          path: ./
 
       # Runs a single command using the runners shell
       - run: |
-          ls -R ./js-scripts
-          node js-scripts/logging.js
+          git clone https://github.com/marcrobledo/RomPatcher.js
+          cd RomPatcher.js
+          npm install --silent

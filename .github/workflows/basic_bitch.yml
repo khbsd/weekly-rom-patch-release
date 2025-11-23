@@ -27,8 +27,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: step 1
-        uses: actions/setup-node@v6
+      - uses: actions/setup-node@v6
 
       # Runs a single command using the runners shell
-      - run: node js-scripts/logging.js
+      - run: node ./js-scripts/logging.js

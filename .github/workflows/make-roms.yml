@@ -39,6 +39,7 @@ jobs:
 
           cd ./$BASE_AUTHOR
           touch $BASE_ROM.gba
+          ls -a
           cd ..
 
       - name: Make $HACK_ROM
@@ -46,6 +47,7 @@ jobs:
           git clone https://github.com/$HACK_AUTHOR/$HACK_REPO ./$HACK_AUTHOR
           cd ./$HACK_AUTHOR
           touch $HACK_ROM.gba
+          ls -a
           cd ..
           ls -a
 

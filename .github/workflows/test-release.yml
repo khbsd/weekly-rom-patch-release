@@ -11,6 +11,9 @@ jobs:
       - name: get repo
         uses: actions/checkout@v6
 
+      - name: make tag
+        run: git tag ${{ github.sha }} ${{ github.sha }}
+
       - name: make release.txt
         run: echo ${{ github.sha }} > Release.txt
 

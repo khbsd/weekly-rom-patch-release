@@ -20,6 +20,10 @@ jobs:
       - name: Confirm git commit SHA output
         run: echo ${{ env.SHORT_SHA }}
 
+      - name: make tag
+        run: |
+          git tag origin ${{ env.SHORT_SHA }}
+          git push origin
 
       - name: make release.txt
         run: echo ${{ env.SHORT_SHA }} > Release.txt

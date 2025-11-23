@@ -13,12 +13,12 @@ jobs:
 
       - name: make tag
         run: |
-          git describe ${{ github.sha }}
-          git tag ${{ github.sha }} ${{ github.sha }}
-          git push origin ${{ github.sha }}
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GIT_SHA_LATEST
+          git tag $GIT_SHA_LATEST $GIT_SHA_LATEST
+          git push origin $GIT_SHA_LATEST
 
       - name: make release.txt
-        run: echo ${{ github.sha }} > Release.txt
+        run: echo $GIT_SHA_LATEST > Release.txt
 
       - name: get action-gh-release
         uses: softprops/action-gh-release@v2

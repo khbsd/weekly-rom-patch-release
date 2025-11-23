@@ -31,12 +31,22 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: get repo
+        uses: actions/checkout@v6
+
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          short_sha=$(git rev-parse --short ${{ github.sha }})
+          echo "SHORT_SHA=$short_sha" >> $GITHUB_ENV
+
       - name: make release.txt
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: do release
-        run: gh release create ${{ env.SHORT_SHA }}
+        run: gh release create ${{ env.SHORT_SHA }} Release.txt
 
       # Runs a single command using the runners shell
       - run: |

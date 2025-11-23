@@ -58,11 +58,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: $BASE_ROM.gba
-          path: ../$BASE_AUTHOR/$BASE_ROM.gba
+          path: $BASE_AUTHOR/$BASE_ROM.gba
 
       - name: Upload $HACK_ROM
         uses: actions/upload-artifact@v4
         with:
           name: $HACK_ROM.gba
-          path: ././$HACK_AUTHOR/$HACK_ROM.gba
+          path: $HACK_AUTHOR/$HACK_ROM.gba
 

@@ -36,7 +36,7 @@ jobs:
           cd ..
 
       - name: Make $ROM_HACK
-        run:
+        run: |
           git clone https://github.com/khbsd/$ROM_HACK
           cd agbcc
           ./install.sh ../$ROM_HACK

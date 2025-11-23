@@ -53,4 +53,4 @@ jobs:
           git clone https://github.com/marcrobledo/RomPatcher.js
           ls -a
           cd RomPatcher.js
-          npm install --silent
+          npm install

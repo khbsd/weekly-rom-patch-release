@@ -20,7 +20,7 @@ jobs:
   #call-workflow-test:
     #uses: ./.github/workflows/whats-good.yml
   test-release:
-    uses: ./.github/workflows/make-release.yml
+    uses: ./.github/workflows/test-release.yml
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on

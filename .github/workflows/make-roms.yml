@@ -42,7 +42,7 @@ jobs:
           ls -a
           cd ..
 
-      - name: Make ${{ env.HACK_ROM
+      - name: Make ${{ env.HACK_ROM }}
         run: |
           git clone https://github.com/${{ env.HACK_AUTHOR }}/${{ env.HACK_REPO }} ./${{ env.HACK_AUTHOR }}
           cd ./${{ env.HACK_AUTHOR }}

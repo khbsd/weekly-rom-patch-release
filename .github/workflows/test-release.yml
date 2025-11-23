@@ -23,7 +23,7 @@ jobs:
       - name: make tag
         run: |
           git tag ${{ env.SHORT_SHA }} ${{ github.sha }}
-          git push origin
+          git push origin ${{ env.SHORT_SHA }}
 
       - name: make release.txt
         run: echo ${{ env.SHORT_SHA }} > Release.txt

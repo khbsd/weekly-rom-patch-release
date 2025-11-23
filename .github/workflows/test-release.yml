@@ -14,15 +14,15 @@ jobs:
       - name: Set short git commit SHA
         id: vars
         run: |
-          calculatedSha=$(git rev-parse --short HEAD
-          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+          short_sha=$(git rev-parse --short ${{ github.sha }})
+          echo "SHORT_SHA=$short_sha" >> $GITHUB_ENV
 
       - name: Confirm git commit SHA output
-        run: echo ${{ env.COMMIT_SHORT_SHA }}
+        run: echo ${{ env.SHORT_SHA }}
 
 
       - name: make release.txt
-        run: echo $GITHUB_OUTPUT > Release.txt
+        run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: get action-gh-release
         uses: softprops/action-gh-release@v2

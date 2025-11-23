@@ -11,11 +11,15 @@ jobs:
       - name: get repo
         uses: actions/checkout@v6
 
-      - name: make tag
+      - name: Set short git commit SHA
+        id: vars
         run: |
-          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          git tag $GITHUB_OUTPUT $GITHUB_OUTPUT
-          git push origin $GITHUB_OUTPUT
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+
+      - name: Confirm git commit SHA output
+        run: echo ${{ env.COMMIT_SHORT_SHA }}
+
 
       - name: make release.txt
         run: echo $GITHUB_OUTPUT > Release.txt

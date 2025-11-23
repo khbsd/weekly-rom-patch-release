@@ -74,10 +74,14 @@ jobs:
           cd RomPatcher.js
           npm install
 
-      - name: Make patch
+      - name: check
         run: |
           ls
-          ls ../
+
+
+      - name: Make patch
+        run: |
+          cd RomPatcher.js
           node index.js create -f ${{ env.PATCH_TYPE }} ../${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba ../${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
 
       - name: make tag

@@ -13,6 +13,7 @@ jobs:
 
       - name: make tag
         run: |
+          git describe ${{ github.sha }}
           git tag ${{ github.sha }} ${{ github.sha }}
           git push origin ${{ github.sha }}
 

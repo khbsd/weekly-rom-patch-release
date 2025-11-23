@@ -49,6 +49,7 @@ jobs:
           cd ./$HACK_AUTHOR
           touch $HACK_ROM.gba
           cd ..
+          ls -Ra
 
       - name: Upload $BASE_ROM
         uses: actions/upload-artifact@v4

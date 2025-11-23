@@ -31,7 +31,7 @@ jobs:
       - name: step 2
         uses: actions/setup-node@v6
       - name: step 3
-        uses: ./.github/workflows/whats_good.yml
+        uses: ./.github/workflows/
 
       # Runs a single command using the runners shell
       - run: node js-scripts/logging.js

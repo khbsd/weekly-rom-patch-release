@@ -7,8 +7,17 @@ jobs:
   make-release:
     runs-on: ubuntu-latest
     env:
-      ROM_BASE: pokeemerald
-      ROM_HACK: pokeemerald-kaya
+      # your github username
+      BASE_AUTHOR: pret
+      HACK_AUTHOR: khbsd
+
+      # your gba filename
+      BASE_ROM: pokeemerald
+      HACK_ROM: pokeemerald-kaya
+
+      # what your repo is named
+      BASE_REPO: pokeemerald
+      HACK_REPO: pokeemerald-expansion-kaya
 
     steps:
       - name: Install binutils
@@ -23,38 +32,37 @@ jobs:
           ./build.sh
           cd ..
 
-
-      - name: Make $ROM_BASE
+      - name: Make $BASE_ROM
         run: |
-          git clone https://github.com/pret/$ROM_BASE
+          git clone https://github.com/$BASE_AUTHOR/$BASE_ROM ./$BASE_AUTHOR
           cd agbcc
-          ./install.sh ../$ROM_BASE
+          ./install.sh ../$BASE_AUTHOR
           cd ..
 
-          cd $ROM_BASE
+          cd ./$BASE_AUTHOR
           make -j$(nproc)
           cd ..
 
-      - name: Make $ROM_HACK
+      - name: Make $HACK_ROM
         run: |
-          git clone https://github.com/khbsd/$ROM_HACK
+          git clone https://github.com/$HACK_AUTHOR/$HACK_REPO ./$HACK_AUTHOR
           cd agbcc
-          ./install.sh ../$ROM_HACK
+          ./install.sh ../$HACK_AUTHOR
           cd ..
 
-          cd $ROM_HACK
+          cd ./$HACK_AUTHOR
           make -j$(nproc)
           cd ..
 
-      - name: Upload $ROM_BASE
+      - name: Upload $BASE_ROM
         uses: actions/upload-artifact@v4
         with:
-          name: $ROM_BASE.gba
-          path: ./$ROM_BASE/$ROM_BASE.gba
+          name: $BASE_ROM.gba
+          path: ../$BASE_AUTHOR/$BASE_ROM.gba
 
-      - name: Upload $ROM_HACK
+      - name: Upload $HACK_ROM
         uses: actions/upload-artifact@v4
         with:
-          name: $ROM_HACK.gba
-          path: ./$ROM_HACK/$ROM_HACK.gba
+          name: $HACK_ROM.gba
+          path: ././$HACK_AUTHOR/$HACK_ROM.gba
 

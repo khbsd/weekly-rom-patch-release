@@ -68,11 +68,16 @@ jobs:
           name: ${{ env.HACK_ROM }}.gba
           path: ${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
 
-      - name: Make patch
+      - name: get patcher
         run: |
           git clone https://github.com/marcrobledo/RomPatcher.js
           cd RomPatcher.js
           npm install
+
+      - name: Make patch
+        run: |
+          ls
+          ls ../
           node index.js create -f ${{ env.PATCH_TYPE }} ../${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba ../${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
 
       - name: make tag

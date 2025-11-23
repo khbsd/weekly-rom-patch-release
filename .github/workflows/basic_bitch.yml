@@ -93,4 +93,6 @@ jobs:
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: do release
-        run: gh release create ${{ env.SHORT_SHA }} ${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}
+        run: |
+          ls
+          gh release create ${{ env.SHORT_SHA }} RomPatcher.js/${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}

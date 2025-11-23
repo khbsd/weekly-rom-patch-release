@@ -30,4 +30,4 @@ jobs:
       - uses: actions/setup-node@v6
 
       # Runs a single command using the runners shell
-      - run: node ./js-scripts/logging.js
+      - run: node js-scripts/logging.js

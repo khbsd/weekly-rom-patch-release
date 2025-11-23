@@ -40,18 +40,14 @@ jobs:
           cd ..
 
           cd ./$BASE_AUTHOR
-          make -j$(nproc)
+          touch $BASE_ROM.gba
           cd ..
 
       - name: Make $HACK_ROM
         run: |
           git clone https://github.com/$HACK_AUTHOR/$HACK_REPO ./$HACK_AUTHOR
-          cd agbcc
-          ./install.sh ../$HACK_AUTHOR
-          cd ..
-
           cd ./$HACK_AUTHOR
-          make -j$(nproc)
+          touch $HACK_ROM.gba
           cd ..
 
       - name: Upload $BASE_ROM

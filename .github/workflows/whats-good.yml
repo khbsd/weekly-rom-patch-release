@@ -16,3 +16,10 @@ jobs:
       - name: run code
         run: node js-scripts/whats_good.js
 
+      - name: get upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: logging.js
+          path: js-scripts/logging.js
+          overwrite: true
+

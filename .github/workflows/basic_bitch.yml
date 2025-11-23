@@ -27,7 +27,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v6
-      - uses: actions/node-setup@v6
+      - uses: actions/setup-node@v6
 
       # Runs a single command using the runners shell
       - run: node js-scripts/logging.js

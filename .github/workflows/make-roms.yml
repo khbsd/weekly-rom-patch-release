@@ -47,13 +47,13 @@ jobs:
           cd ..
 
       - name: Upload $ROM_BASE
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v4
         with:
           name: $ROM_BASE.gba
           path: ./$ROM_BASE/$ROM_BASE.gba
 
       - name: Upload $ROM_HACK
-        uses: actions/upload-artifact
+        uses: actions/upload-artifact@v4
         with:
           name: $ROM_HACK.gba
           path: ./$ROM_HACK/$ROM_HACK.gba

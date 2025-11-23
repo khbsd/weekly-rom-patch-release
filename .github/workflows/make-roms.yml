@@ -1,0 +1,60 @@
+name: make release
+
+on:
+  workflow_call:
+
+jobs:
+  make-release:
+    runs-on: ubuntu-latest
+    env:
+      ROM_BASE: pokeemerald
+      ROM_HACK: pokeemerald-kaya
+
+    steps:
+      - name: Install binutils
+        run: |
+          sudo apt update
+          sudo apt install -y binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi libpng-dev python3
+
+      - name: Make agbcc
+        run: |
+          git clone https://github.com/pret/agbcc
+          cd agbcc
+          ./build.sh
+          cd ..
+
+
+      - name: Make $ROM_BASE
+        run: |
+          git clone https://github.com/pret/$ROM_BASE
+          cd agbcc
+          ./install.sh ../$ROM_BASE
+          cd ..
+
+          cd $ROM_BASE
+          make -j$(nproc)
+          cd ..
+
+      - name: Make $ROM_HACK
+        run:
+          git clone https://github.com/khbsd/$ROM_HACK
+          cd agbcc
+          ./install.sh ../$ROM_HACK
+          cd ..
+
+          cd $ROM_HACK
+          make -j$(nproc)
+          cd ..
+
+      - name: Upload $ROM_BASE
+        uses: actions/upload-artifact
+        with:
+          name: $ROM_BASE.gba
+          path: ./$ROM_BASE/$ROM_BASE.gba
+
+      - name: Upload $ROM_HACK
+        uses: actions/upload-artifact
+        with:
+          name: $ROM_HACK.gba
+          path: ./$ROM_HACK/$ROM_HACK.gba
+

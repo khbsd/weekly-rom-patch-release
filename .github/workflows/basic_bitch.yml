@@ -7,27 +7,26 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  label:
-    branches: [ "main" ]
   schedule:
-    - cron: '0/30 * * * *'
+    - cron: '38 2 * * 0'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  #call-workflow-test:
-    #uses: ./.github/workflows/whats-good.yml
-  test-release:
-    uses: ./.github/workflows/test-release.yml
+  make-roms:
+    uses: ./.github/workflows/make-roms.yml
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: test-release
+    needs: make-roms
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ROM_BASE: pokeemerald
+      ROM_HACK: pokeemerald-kaya
+      PATCH_TYPE: bps
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,21 +35,41 @@ jobs:
       - name: get repo
         uses: actions/checkout@v6
 
-      - name: Set short git commit SHA
+      - name: Get node deps
+        uses: actions/setup-node@v6
+
+      - name: get short sha
         id: vars
         run: |
           short_sha=$(git rev-parse --short ${{ github.sha }})
           echo "SHORT_SHA=$short_sha" >> $GITHUB_ENV
 
+      - name: Download $ROM_BASE
+        uses: actions/download-artifact
+        with:
+          name: $ROM_BASE.gba
+          path: ./$ROM_BASE.gba
+
+      - name: Download $ROM_HACK
+        uses: actions/download-artifact
+        with:
+          name: $ROM_HACK.gba
+          path: ./$ROM_HACK.gba
+
+      - name: Make patch
+        run: |
+          git clone https://github.com/marcrobledo/RomPatcher.js
+          cd RomPatcher.js
+          npm install
+          node index.js create -f $PATCH_TYPE ../$ROM_BASE.gba ../$ROM_HACK.gba
+
+      - name: make tag
+        run: |
+          git tag ${{ env.SHORT_SHA }} ${{ github.sha }}
+          git push origin ${{ env.SHORT_SHA }}
+
       - name: make release.txt
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: do release
-        run: gh release create ${{ env.SHORT_SHA }} Release.txt
-
-      # Runs a single command using the runners shell
-      - run: |
-          git clone https://github.com/marcrobledo/RomPatcher.js
-          ls -a
-          cd RomPatcher.js
-          npm install
+        run: gh release create ${{ env.SHORT_SHA }} $ROM_HACK.$PATCH_TYPE

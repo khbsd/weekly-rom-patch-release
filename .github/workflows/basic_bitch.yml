@@ -60,13 +60,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.BASE_ROM }}.gba
-          path: ${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba
+          path: ${{ env.BASE_AUTHOR }}/
 
       - name: Download ${{ env.HACK_ROM }}
         uses: actions/download-artifact@v4
         with:
           name: ${{ env.HACK_ROM }}.gba
-          path: ${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
+          path: ${{ env.HACK_AUTHOR }}/
 
       - name: get patcher
         run: |
@@ -76,8 +76,8 @@ jobs:
 
       - name: check
         run: |
-          ls
-
+          ls ${{ env.BASE_AUTHOR }}/
+          ls ${{ env.HACK_AUTHOR }}/
 
       - name: Make patch
         run: |
@@ -93,4 +93,4 @@ jobs:
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: do release
-        run: gh release create ${{ env.SHORT_SHA }} *.${{ env.PATCH_TYPE }}
+        run: gh release create ${{ env.SHORT_SHA }} ${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}

@@ -14,7 +14,7 @@ jobs:
       - name: make tag
         run: |
           git tag ${{ github.sha }} ${{ github.sha }}
-          git push main
+          git push origin ${{ github.sha }}
 
       - name: make release.txt
         run: echo ${{ github.sha }} > Release.txt

@@ -34,8 +34,8 @@ jobs:
         run: echo ${{ env.SHORT_SHA }} > Release.txt
 
       - name: get action-gh-release
-        uses: softprops/action-gh-release@v2.4.2
-        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v2
+        #if: github.ref_type == 'tag'
         with:
           files: Release.txt
           make_latest: true

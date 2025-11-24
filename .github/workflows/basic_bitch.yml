@@ -100,5 +100,6 @@ jobs:
       - name: cleanup
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: *.gba
+          name: |
+            *.gba
 

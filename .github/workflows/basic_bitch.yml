@@ -100,10 +100,10 @@ jobs:
       - name: cleanup ${{ env.BASE_ROM }}
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: /${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba
+          name: ${{ env.BASE_ROM }}.gba
 
       - name: cleanup ${{ env.HACK_ROM }}
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: /${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
+          name: ${{ env.HACK_ROM }}.gba
 

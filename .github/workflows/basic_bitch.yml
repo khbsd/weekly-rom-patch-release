@@ -96,3 +96,14 @@ jobs:
         run: |
           ls
           gh release create ${{ env.SHORT_SHA }} RomPatcher.js/${{ env.HACK_ROM }}.${{ env.PATCH_TYPE }}
+
+      - name: cleanup ${{ env.BASE_ROM }}
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: /${{ env.BASE_AUTHOR }}/${{ env.BASE_ROM }}.gba
+
+      - name: cleanup ${{ env.HACK_ROM }}
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: /${{ env.HACK_AUTHOR }}/${{ env.HACK_ROM }}.gba
+

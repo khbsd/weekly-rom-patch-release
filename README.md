@@ -27,7 +27,7 @@ env:
 3) edit the `BASE_AUTHOR`, `BASE_ROM`, and `BASE_REPO` ***if*** your hack does not use pokemon emerald as a base.
 4) edit the `PATCH_TYPE` variable to any type supported by `Rompatcher.js`. bps is objectively the best, though :)
 5) once done, copy those variables to the other file, so both files have your edited variables and they match.
-6) use https://crontab.guru/ to choose your release schedule, and edit the following section in `weekly-patch-release.yml`:
+6) use https://crontab.guru/ to choose your release schedule, and edit the following section in `weekly-patch-release.yml` to match your desired schedule:
 ```yml
 on:
   schedule:
